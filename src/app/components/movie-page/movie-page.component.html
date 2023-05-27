@@ -1,0 +1,25 @@
+<div class="movie-page">
+  <mat-form-field class="example-full-width">
+    <mat-label>Search by title...</mat-label>
+    <input
+      matInput
+      [formControl]="title"
+      placeholder="Type title for search..."
+    />
+  </mat-form-field>
+  <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
+  <div [class.movie-page-item]="!loading" *ngIf="movies$ | async as movies">
+    <ng-container *ngIf="!loading">
+      <div
+        class="movie-page-item-row"
+        *ngFor="let movie of movies"
+        [routerLink]="'/movie-info'"
+        [queryParams]="{ imdbId: movie.imdb_id }"
+        [queryParamsHandling]="'merge'"
+      >
+        <h3>{{ movie.title }}</h3>
+      </div>
+      <span style="text-align: center" *ngIf="!movies.length">No data</span>
+    </ng-container>
+  </div>
+</div>

@@ -1,0 +1,18 @@
+<div class="spinner" *ngIf="loading">
+  <mat-spinner></mat-spinner>
+</div>
+<div class="info" *ngIf="movieInfo$ | async as movie">
+  <ng-container *ngIf="!loading">
+    <img class="info-img" [src]="movie?.image_url" alt="" />
+    <div class="info-block">
+      <div class="info-block-header">
+        <h1>
+          {{ movie.title }}
+          <span *ngIf="movie.year">{{ " (" + movie.year + ")" }}</span>
+        </h1>
+        <button class="button" (click)="back()">Назад к результатам</button>
+      </div>
+      <p>{{ movie.description }}</p>
+    </div>
+  </ng-container>
+</div>
